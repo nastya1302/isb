@@ -2,14 +2,28 @@ from working_functions import *
 from paths import path
 
 
-def decryption(path_sourse_text: str, path_key: str, path_encrypted_text: str) -> None:
+def frequency_analysis_of_text(path: str, text: str) -> None:
+    """
+    A function for performing frequency analysis of a given ciphertext.
+    """
+    frequency = {}
+    l = len(text)
+    text_litters = []
+    for i in text:
+        if text_litters.count(i) == 0:
+            text_litters.append(i)
+    for i in text_litters:
+        frequency[i] = text.count(i) / l
+    write_json(path, frequency)
+
+
+def decryption(path_sourse_text: str, path_key: str, path_encrypted_text: str, path_text_analysis: str) -> None:
     """
     A function for creating decrypted text.
     """
     text: str = read_file(path_encrypted_text)
-    with open("C:/Users/nasty/isb/lab_1/task2_key.json", "r", encoding="UTF-8") as f:
-        key = json.load(f)
     key: dict = read_json(path_key)
+    frequency_analysis_of_text(path_text_analysis, text)
     new_text: str = ""
     for letter in text:
         if letter in key:
@@ -20,7 +34,7 @@ def decryption(path_sourse_text: str, path_key: str, path_encrypted_text: str) -
 def main() -> None:
     paths: dict = read_json(path)
     decryption(
-        paths["task2_sourse_text"], paths["task2_key"], paths["task2_encrypted_text"]
+        paths["task2_sourse_text"], paths["task2_key"], paths["task2_encrypted_text"], paths["task2_text_analysis"]
     )
 
 

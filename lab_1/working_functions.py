@@ -25,3 +25,11 @@ def read_json(path: str) -> dict:
     with open(path, "r", encoding="UTF-8") as f:
         text = json.load(f)
     return text
+
+
+def write_json(path: str, dictionary: dict) -> None:
+    """
+    A function for writing to a file using a specified path.
+    """
+    with open(path, 'w') as f:
+        json.dump(dictionary, f)
