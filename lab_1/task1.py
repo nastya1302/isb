@@ -6,7 +6,7 @@ def create_dict() -> dict:
     i: int = 0
     for letter in alphabet:
         dict_alphabet[letter] = i
-        i = i + 1
+        i += 1    
     return dict_alphabet
 
 
