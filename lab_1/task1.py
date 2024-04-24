@@ -1,15 +1,5 @@
 from working_functions import *
-from paths import path
-
-
-alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
-
-
-def create_key(path: str, key: str) -> None:
-    """
-    A function for creating a file with a key for encrypting text. accepts the input path to save the key and the key itself.
-    """
-    write_file(path, key)
+from const import *
 
 
 def create_dict(sourse_alphabet: str) -> dict:
@@ -43,21 +33,20 @@ def encryption(path_sourse_text: str, path_key: str, path_encrypted_text: str) -
     key: str = read_file(path_key)
     text: str = "".join(text.split())
     key: str = (key * (len(text) // len(key) + 1))[: len(text)]
-    dict_alphabet: dict = create_dict(alphabet)
-    table: dict = create_vigenere_ciphe(alphabet)
+    dict_alphabet: dict = create_dict(ALPHABET)
+    table: dict = create_vigenere_ciphe(ALPHABET)
     new_text: str = ""
     for k, t in zip(key, text):
         new_text += table[dict_alphabet[k]][dict_alphabet[t]]
     write_file(path_encrypted_text, new_text)
 
 
-def main(key: str) -> None:
-    paths: dict = read_json(path)
-    create_key(paths["task1_key"], key)
+def main() -> None:
+    paths: dict = read_json(PATH)
     encryption(
         paths["task1_sourse_text"], paths["task1_key"], paths["task1_encrypted_text"]
     )
 
 
 if __name__ == "__main__":
-    main("БРОДСКИЙ")
+    main()

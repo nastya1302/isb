@@ -1,5 +1,5 @@
 from working_functions import *
-from paths import path
+from const import PATH
 
 
 def frequency_analysis_of_text(path: str, text: str) -> None:
@@ -32,7 +32,7 @@ def decryption(path_sourse_text: str, path_key: str, path_encrypted_text: str, p
 
 
 def main() -> None:
-    paths: dict = read_json(path)
+    paths: dict = read_json(PATH)
     decryption(
         paths["task2_sourse_text"], paths["task2_key"], paths["task2_encrypted_text"], paths["task2_text_analysis"]
     )
