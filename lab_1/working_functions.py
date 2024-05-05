@@ -45,3 +45,4 @@ def write_json(path: str, dictionary: dict) -> None:
             json.dump(dictionary, f)
     except Exception as e:
         print(e)
+ 
