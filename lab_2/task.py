@@ -21,13 +21,7 @@ def frequency_bitwise_test(sequence: str) -> float:
     The frequency bitwise test finds the value
     of P_value to check the sequence for randomness.
     """
-    summa: float = 0
-    for count in sequence:
-        if count == "1":
-            summa += 1
-        else:
-            summa += -1
-    summa = abs(summa) / sqrt(len(sequence))
+    summa: float = abs(sequence.count("1") - sequence.count("0")) / sqrt(len(sequence))
     p_value: float = erfc(summa / sqrt(2))
     return p_value
 
@@ -46,18 +40,8 @@ def test_for_same_consecutive_bits(sequence: str) -> float:
         for i in range(len(sequence) - 1):
             if not (sequence[i] == sequence[i + 1]):
                 v_n += 1
-        p_value = erfc(
-            abs(
-                v_n
-                - 2 * len(sequence) * percentage_of_units * (1 - percentage_of_units)
-            )
-            / (
-                2
-                * sqrt(2 * len(sequence))
-                * percentage_of_units
-                * (1 - percentage_of_units)
-            )
-        )
+        p_value = erfc(abs(v_n - 2 * len(sequence) * percentage_of_units * (1 - percentage_of_units))
+            / (2 * sqrt(2 * len(sequence)) * percentage_of_units * (1 - percentage_of_units)))
     return p_value
 
 
@@ -70,11 +54,11 @@ def longest_sequence_test(sequence: str) -> float:
     list_lenght: list = []
     for block_sequence in blocks_sequence:
         list_lenght.append(len(max(block_sequence.split("0"), key=len)))
-    v1 = list_lenght.count(1) + list_lenght.count(0)
-    v2 = list_lenght.count(2)
-    v3 = list_lenght.count(3)
-    v4 = len(list_lenght) - (v1 + v2 + v3)
-    v = [v1, v2, v3, v4]
+    v: list = []
+    v.append(list_lenght.count(1) + list_lenght.count(0))
+    v.append(list_lenght.count(2))
+    v.append(list_lenght.count(3))
+    v.append(len(list_lenght) - (v[0] + v[1] + v[2]))
     x: float = 0
     for v_i, pi_i in zip(v, const.PI):
         x += ((v_i - 16 * pi_i) * (v_i - 16 * pi_i)) / (16 * pi_i)
@@ -94,4 +78,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
- 
