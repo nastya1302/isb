@@ -36,13 +36,20 @@ def read_json(path: str) -> dict:
         print(e)
 
 
-def write_json(path: str, dictionary: dict) -> None:
-    """
-    A function for writing to a file using a specified path.
-    """
+def read_file_bytes(path: str) -> bytes:
+    """ """
     try:
-        with open(path, 'w') as f:
-            json.dump(dictionary, f)
+        with open(path, mode="rb") as f:
+            text = f.read()
+        return text
+    except FileNotFoundError as e:
+        print(e)
+
+
+def write_file_bytes(path: str, text: bytes) -> None:
+    """ """
+    try:
+        with open(path, "wb") as f:
+            f.write(text)
     except Exception as e:
         print(e)
- 

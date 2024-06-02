@@ -1,0 +1,1 @@
+PATH: str = "lab_3\settings.json"
